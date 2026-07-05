@@ -1,16 +1,44 @@
-# React + Vite
+A React web app to generate branded booking confirmations with flexible payment installments and PNG export.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ✨ Features
+📝 Dynamic form – agency, flight, dates, seats, fare
 
-Currently, two official plugins are available:
+💰 Flexible installments – 3 payments with custom % and due dates
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+✍️ Digital signature – name, title, and signature image
 
-## React Compiler
+📥 One-click PNG download – high-quality export with proper padding
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🎨 Premium gold & navy UI – responsive, no database required
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
+React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Tailwind CSS
+
+html2canvas (PNG export)
+
+## 🚀 Quick Start
+bash
+git clone <repo-url>
+cd flynas-booking-generator
+npm install
+npm start
+
+## 📁 Public Assets
+Place these files in /public:
+
+flynas-circle.png – Company logo
+
+signaturepng.png – Signature image (optional)
+
+## 📸 Usage
+Fill in the form
+
+Click Generate Template
+
+Click Download PNG to save
+
+## 📄 License
+MIT
+
