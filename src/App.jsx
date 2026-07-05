@@ -570,10 +570,18 @@ function App() {
 
                       {/* Sign-off Segment */}
                       <div className="border-2 border-dashed border-[#d5cdc4] rounded-xl p-4">
-                        <div className="text-xs font-bold uppercase tracking-wider text-[#6b5f7a] mb-1">✍️ Authorized Signature</div>
+                        <div className="text-xs font-bold  tracking-wider text-[#6b5f7a] mb-1">Best Regards</div>
                         <div className="text-base font-bold text-[#01b1ae]">{formData.signatoryName}</div>
                         <div className="text-xs font-medium text-slate-700">{formData.signatoryTitle}</div>
                         <div className="my-1.5"><img src="/signaturepng.png" alt="signature" className="h-12" /></div>
+                        <div className='text-sm space-y-2'>
+                          <p className='font-bold'>FLYNAS GSA BANGLADESH</p>
+                          <p className=' font-light'> Rupayan Trade Centre | 1st  Floor <br />
+                            114, Kazi Nazrul Islam Avenue | Bangla Motor | Dhaka-1205 | Bangladesh <br />
+                            Tel: +88-02-41031062-64  Mob: +88 01859-666206</p>
+                          <u className='cursor-pointer text-[#01b1ae]'>Email: flynasbd.dac@gmail.com  |  Web: www.flynas.com</u>
+                        </div>
+
                       </div>
 
                     </div>
