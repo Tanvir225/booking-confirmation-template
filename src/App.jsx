@@ -6,7 +6,8 @@ function App() {
   // ── State ──
   const [formData, setFormData] = useState({
     agencyName: '',
-    reference: '',
+    // reference: '',
+    pnr: '',
     tripType: 'roundTrip', // default to roundTrip for Umrah/Return scenarios
     // Outbound Segment
     travelDate: '',
@@ -100,12 +101,12 @@ function App() {
         onclone: (clonedDoc) => {
           const clonedEl = clonedDoc.getElementById('template-content');
           if (clonedEl) {
-            clonedEl.style.padding = '30px';
+            clonedEl.style.padding = '20px';
           }
         }
       });
 
-      const padding = 30;
+      const padding = 20;
       const paddedCanvas = document.createElement('canvas');
       paddedCanvas.width = canvas.width + (padding * 2 * 3);
       paddedCanvas.height = canvas.height + (padding * 2 * 3);
@@ -129,6 +130,7 @@ function App() {
   const resetForm = () => {
     setFormData({
       agencyName: '',
+      pnr: '',
       tripType: 'roundTrip',
       travelDate: '',
       flightNumber: '',
@@ -195,7 +197,21 @@ function App() {
               </div>
 
               {/* Reference & Journey Type */}
-              <div>
+              <div className="">
+
+                {/* PNR Input */}
+                <div>
+                  <label className="block text-xs font-semibold text-[#2d1b4e] mb-1">PNR</label>
+                  <input
+                    type="text"
+                    name="pnr"
+                    value={formData.pnr}
+                    onChange={handleChange}
+                    placeholder="HWMSD1"
+                    className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] focus:border-[#c9a84c] focus:ring-4 focus:ring-[#c9a84c]/15 outline-none transition"
+                  />
+                </div>
+
                 <label className="block text-xs font-semibold text-[#2d1b4e] mb-1 w-full">
                   Journey Type
                 </label>
@@ -481,63 +497,111 @@ function App() {
                       <div className="text-2xl font-semibold font-serif text-[#1a0a2e]">
                         Dear <span className="text-[#01b1ae]">{formData.agencyName}</span>,
                       </div>
-                      <div className="text-[14px] text-[#4a3d5a] font-medium mt-1 mb-4">
-                        Greetings from Flynas! We are pleased to confirm your group booking segment details below.
-                      </div>
-
-                      {/* FLIGHT ITINERARY SECTION */}
-                      <div className="space-y-3 mb-4">
-                        {/* Outbound Sector View */}
-                        <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-[#01b1ae] border-y border-r border-slate-200">
-                          <div className="text-xs font-bold uppercase text-[#01b1ae] tracking-wider mb-2 flex justify-between">
-                            <span>🛫 Outbound Flight</span>
-                            <span className="font-bold  font-sans normal-case text-[#01b1ae]">Confirmed</span>
-                          </div>
-                          <div className="grid grid-cols-3 gap-y-2 text-sm">
-                            <div><span className="text-xs text-slate-700 block">Flight No</span><strong>{formData.flightNumber}</strong></div>
-                            <div><span className="text-xs text-slate-700 block">Sector</span><strong>{formData.routeFrom} → {formData.routeTo}</strong></div>
-                            <div><span className="text-xs text-slate-700 block">Date</span><strong>{formatDate(formData.travelDate)}</strong></div>
-                            <div><span className="text-xs text-slate-700 block">Departure</span><strong>{formatTime(formData.departureTime)}</strong></div>
-                            <div><span className="text-xs text-slate-700 block">Arrival</span><strong>{formatTime(formData.arrivalTime)}</strong></div>
-                            <div><span className="text-xs text-slate-700 block">Allocation</span><strong>{formData.seats} Seats</strong></div>
-                          </div>
-                        </div>
-
-                        {/* Return Sector View (Umrah dynamic card) */}
-                        {formData.tripType === 'roundTrip' && (
-                          <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-[#c9a84c] border-y border-r">
-                            <div className="text-xs font-bold uppercase text-[#01b1ae] tracking-wider mb-2 flex justify-between">
-                              <span>🛬 Return Flight (Umrah Segment)</span>
-                              <span className="font-bold  font-sans normal-case text-[#01b1ae]">Confirmed</span>
-                            </div>
-                            <div className="grid grid-cols-3 gap-y-2 text-sm">
-                              <div><span className="text-xs text-slate-700 block">Flight No</span><strong>{formData.returnFlightNumber}</strong></div>
-                              <div><span className="text-xs text-slate-700 block">Sector</span><strong>{formData.returnRouteFrom} → {formData.returnRouteTo}</strong></div>
-                              <div><span className="text-xs text-slate-700 block">Date</span><strong>{formatDate(formData.returnTravelDate)}</strong></div>
-                              <div><span className="text-xs text-slate-700 block">Departure</span><strong>{formatTime(formData.returnDepartureTime)}</strong></div>
-                              <div><span className="text-xs text-slate-700 block">Arrival</span><strong>{formatTime(formData.returnArrivalTime)}</strong></div>
-                              <div><span className="text-xs text-slate-700 block">Allocation</span><strong>{formData.seats} Seats</strong></div>
-                            </div>
-                          </div>
+                      {/* ── GREETING MESSAGE (conditional) ── */}
+                      <div className="text-[14px] text-[#4a3d5a] text-justify font-medium mt-1 mb-4">
+                        {formData.pnr ? (
+                          <>
+                            Your booking has been confirmed and payment has been received.
+                            Please find your <strong>PNR</strong> and flight details below.
+                          </>
+                        ) : (
+                          <>
+                            Greetings from Flynas! We are pleased to confirm your group 
+                            with the following details. Please proceed with the payment as per the
+                            installment plan outlined below.
+                          </>
                         )}
                       </div>
 
-                      {/* Total Pricing Row */}
-                      <div className="bg-gradient-to-r from-[#1a0a2e] to-[#2d1b4e] rounded-xl p-4 flex items-center justify-between flex-wrap gap-3 mb-4">
-                        <div>
-                          <div className="text-xs font-medium text-white/70 uppercase tracking-wider">Total Combined Fare ({formData.seats} Pax)</div>
-                          <div className="text-2xl font-bold text-[#c9a84c] font-serif">
-                            <span className="text-base font-semibold text-[#e8d5b0] mr-1">{formData.currency}</span>
-                            {formatNumber(totalFare)}
+
+                      {/* ── PNR DISPLAY (if provided) ── */}
+                      {formData.pnr && (
+                        <div className="mb-1">
+                          <div className="inline-block  border border-[#01b1ae]/30 rounded-lg px-8 ">
+                            <span className="text-xs font-medium text-[#6b5f7a]">PNR:</span>
+                            <span className="ml-2 font-bold text-[#1a0a2e]">{formData.pnr}</span>
                           </div>
                         </div>
-                        <div className="bg-[#c9a84c]/15 border border-[#c9a84c]/25 rounded-full px-4 py-1.5">
-                          <span className="text-xs text-white/90 font-medium">⏳ Pay Deadline: <strong className="text-white">{formatDate(formData.deadline)}</strong></span>
+                      )}
+
+                      {/* ── FLIGHT ITINERARY TABLE ── */}
+                      <div className=" mb-2">
+                        <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-[#01b1ae] border-y border-r ">
+                          <div className="text-xs font-bold uppercase text-[#01b1ae] tracking-wider mb-2 flex justify-between">
+                            <span>🛫 Flight Itinerary</span>
+                            {/* Seats Allocation Footer */}
+
+                            <span className="text-xs text-slate-800">
+                              <span className="font-semibold ">{formData.seats}</span> Seats Allocated
+                            </span>
+
+                            <span className="font-bold font-sans normal-case text-[#01b1ae]">Confirmed</span>
+                          </div>
+
+                          {/* ── TABLE ── */}
+                          <table className="w-full text-sm border-collapse">
+                            <thead>
+                              <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20">
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT No</th>
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Route</th>
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Dep Time</th>
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Arv Time</th>
+                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Remarks</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {/* Outbound Row */}
+                              <tr className="border-b border-slate-200/60 hover:bg-white/50 transition">
+                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formatDate(formData.travelDate)}</td>
+                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.flightNumber || '—'}</td>
+                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.routeFrom} → {formData.routeTo}</td>
+                                <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.departureTime)}</td>
+                                <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.arrivalTime)}</td>
+                                <td className="py-2 px-2">
+                                  <span className="inline-block px-2  text-green-700 text-[10px] font-semibold rounded-full">Outbound</span>
+                                </td>
+                              </tr>
+
+                              {/* Return Row (only if roundTrip) */}
+                              {formData.tripType === 'roundTrip' && (
+                                <tr className="hover:bg-white/50 transition">
+                                  <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formatDate(formData.returnTravelDate)}</td>
+                                  <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.returnFlightNumber || '—'}</td>
+                                  <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.returnRouteFrom} → {formData.returnRouteTo}</td>
+                                  <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.returnDepartureTime)}</td>
+                                  <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.returnArrivalTime)}</td>
+                                  <td className="py-2 px-2">
+                                    <span className="inline-block px-2 text-[#01b1ae] text-[10px] font-semibold rounded-full">Return (Umrah)</span>
+                                  </td>
+                                </tr>
+                              )}
+                            </tbody>
+                          </table>
+
                         </div>
                       </div>
 
+                      {/* Total Pricing Row */}
+                      {
+                        !formData?.pnr && (
+                          <div className="bg-gradient-to-r from-[#1a0a2e] to-[#2d1b4e] rounded-xl p-4 flex items-center justify-between flex-wrap gap-3 mb-4">
+                            <div>
+                              <div className="text-xs font-medium text-white/70 uppercase tracking-wider">Total Combined Fare : {formData.seats} Pax * {formData.farePerPax} {formData.currency}</div>
+                              <div className="text-2xl font-bold text-[#c9a84c] font-serif">
+                                <span className="text-base font-semibold text-[#e8d5b0] mr-1">{formData.currency}</span>
+                                {formatNumber(totalFare)}
+                              </div>
+                            </div>
+                            <div className="rounded-full px-2 py-1">
+                              <span className="text-xs text-white/90 font-medium">⏳ Pay Deadline: <strong className="text-white">{formatDate(formData.deadline)}</strong></span>
+                            </div>
+                          </div>
+                        )
+                      }
+
                       {/* ── DYNAMIC PAYMENT INSTALLMENT PLAN ── */}
-                      {installments.length > 0 && (
+                      {!formData.pnr && installments.length > 0 && (
                         <div className="bg-[#01b1ae] rounded-xl p-4 mb-4">
                           <div className="font-bold uppercase tracking-wider text-white mb-2.5 text-xs">📋 Payment Installment Plan</div>
                           <div className="flex flex-wrap gap-3">
@@ -555,21 +619,56 @@ function App() {
                       )}
 
                       {/* Bank Specifications */}
-                      <div className="bg-teal-50 border border-teal-200 rounded-xl p-3.5 mb-4">
-                        <div className="font-bold uppercase tracking-wider text-teal-700 mb-1.5">🏦 Bank Transfer Details</div>
-                        <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-slate-700">
-                          <div><span className="text-slate-700">Bank Name : </span> <span className="font-semibold text-slate-900">HSBC BANGLADESH</span></div>
-                          <div><span className="text-slate-700">Account : </span> <span className="font-semibold text-slate-900">Flynas Company</span></div>
-                          <div><span className="text-slate-700">A/C No  : </span> <span className="font-semibold text-slate-900">007-046931-011</span></div>
-                          <div><span className="text-slate-700">Swift : </span> <span className="font-semibold text-slate-900">HSBCBDDH</span></div>
-                          <div><span className="text-slate-700">Routing : </span> <span className="font-semibold text-slate-900">115264636</span></div>
-                          <div><span className="text-slate-700">Method : </span> <span className="font-semibold text-slate-900">RTGS</span></div>
-                          <div className="col-span-2 mt-0.5"><span className="text-slate-700">Branch  : </span> <span className="text-slate-900">Uttara Branch, Giant Business Tower, Dhaka, Bangladesh</span></div>
+                      {
+                        !formData.pnr && (
+                          <div className="bg-teal-50 border border-teal-200 rounded-xl p-3.5 mb-4">
+                            <div className="font-bold uppercase tracking-wider text-teal-700 mb-1.5">🏦 Bank Transfer Details</div>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-slate-700">
+                              <div><span className="text-slate-700">Bank Name : </span> <span className="font-semibold text-slate-900">HSBC BANGLADESH</span></div>
+                              <div><span className="text-slate-700">Account : </span> <span className="font-semibold text-slate-900">Flynas Company</span></div>
+                              <div><span className="text-slate-700">A/C No  : </span> <span className="font-semibold text-slate-900">007-046931-011</span></div>
+                              <div><span className="text-slate-700">Swift : </span> <span className="font-semibold text-slate-900">HSBCBDDH</span></div>
+                              <div><span className="text-slate-700">Routing : </span> <span className="font-semibold text-slate-900">115264636</span></div>
+                              <div><span className="text-slate-700">Method : </span> <span className="font-semibold text-slate-900">RTGS</span></div>
+                              <div className="col-span-2 mt-0.5"><span className="text-slate-700">Branch  : </span> <span className="text-slate-900">Uttara Branch, Giant Business Tower, Dhaka, Bangladesh</span></div>
+                            </div>
+                          </div>
+                        )
+                      }
+
+                      {/* ── TERMS & CONDITIONS ── */}
+                      <div className="bg-amber-50/80 border border-amber-200/60 rounded-xl p-4 mb-4">
+                        <div className="flex items-center gap-2 mb-2.5">
+                          <span className="text-amber-600 text-sm font-bold">📋</span>
+                          <span className="text-xs font-bold uppercase tracking-wider text-amber-700">Important Terms & Conditions</span>
+                          <div className="flex-1 h-px bg-amber-200/60"></div>
+                        </div>
+
+                        <ul className="space-y-1.5 text-sm text-[#2d1b4e]">
+                          <li className="flex items-start gap-2.5">
+                            <span className="text-amber-500 text-base leading-5">•</span>
+                            <span><strong className="font-semibold">Non-Refundable & Non-Changeable:</strong> Flynas tickets are non-refundable and non-changeable once issued.</span>
+                          </li>
+                          <li className="flex items-start gap-2.5">
+                            <span className="text-amber-500 text-base leading-5">•</span>
+                            <span><strong className="font-semibold">Child Fare Policy:</strong> We do not offer separate child fares. All passengers are charged at the applicable adult fare.</span>
+                          </li>
+                          <li className="flex items-start gap-2.5">
+                            <span className="text-amber-500 text-base leading-5">•</span>
+                            <span><strong className="font-semibold">Fare Availability:</strong> Fares are subject to availability at the time of booking and may change without prior notice.</span>
+                          </li>
+                        </ul>
+
+                        {/* Small footer note */}
+                        <div className="mt-2.5 pt-2 border-t border-amber-200/40">
+                          <p className="text-[10px] italic">
+                            By proceeding with this booking, you agree to the above terms and conditions.
+                          </p>
                         </div>
                       </div>
 
                       {/* Sign-off Segment */}
-                      <div className="border-2 border-dashed border-[#d5cdc4] rounded-xl p-4">
+                      <div className="border-2 border-dashed border-[#d5cdc4] rounded-xl p-3">
                         <div className="text-xs font-bold  tracking-wider text-[#6b5f7a] mb-1">Best Regards</div>
                         <div className="text-base font-bold text-[#01b1ae]">{formData.signatoryName}</div>
                         <div className="text-xs font-medium text-slate-700">{formData.signatoryTitle}</div>
