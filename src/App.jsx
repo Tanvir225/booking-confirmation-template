@@ -554,7 +554,7 @@ function App() {
                               {/* Outbound Row */}
                               <tr className="border-b border-slate-200/60 hover:bg-white/50 transition">
                                 <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formatDate(formData.travelDate)}</td>
-                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.flightNumber || '—'}</td>
+                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">XY-{formData.flightNumber || '—'}</td>
                                 <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.routeFrom} → {formData.routeTo}</td>
                                 <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.departureTime)}</td>
                                 <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.arrivalTime)}</td>
@@ -567,7 +567,7 @@ function App() {
                               {formData.tripType === 'roundTrip' && (
                                 <tr className="hover:bg-white/50 transition">
                                   <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formatDate(formData.returnTravelDate)}</td>
-                                  <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.returnFlightNumber || '—'}</td>
+                                  <td className="py-2 px-2 font-semibold text-[#1a0a2e]">XY-{formData.returnFlightNumber || '—'}</td>
                                   <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.returnRouteFrom} → {formData.returnRouteTo}</td>
                                   <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.returnDepartureTime)}</td>
                                   <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.returnArrivalTime)}</td>
