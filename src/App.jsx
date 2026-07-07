@@ -175,7 +175,7 @@ function App() {
         {/* Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-[450px,1fr] gap-8">
           {/* ─── FORM ─── */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 sticky top-4 h-fit max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 md:sticky md:top-4 h-fit max-h-[90vh] overflow-y-auto">
             <h2 className="text-lg font-semibold text-[#1a0a2e]">Booking Details</h2>
             <p className="text-sm text-[#6b5f7a] mb-5 pb-4 border-b border-[#eeeae5]">
               Fill in the fields to generate your confirmation template.
@@ -457,7 +457,7 @@ function App() {
 
           {/* ─── PREVIEW ─── */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center justify-between gap-3">
               <span className="text-sm text-[#6b5f7a] bg-[#e8e0d8] px-4 py-1.5 rounded-full font-medium">⬇️ Preview</span>
               <button onClick={downloadPNG} disabled={!isGenerated} className={`px-6 py-2.5 rounded-full font-semibold flex items-center gap-2 transition ${isGenerated ? 'bg-[#01b1ae] text-white hover:bg-[#019a97]' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" /></svg>
@@ -466,7 +466,7 @@ function App() {
             </div>
 
             {/* Template Card Wrapper */}
-            <div className="bg-white rounded-2xl p-5 shadow-lg border border-[#c9a84c]/12 overflow-auto">
+            <div className="bg-white rounded-2xl md:p-5 shadow-lg border border-[#c9a84c]/12 ">
               {!isGenerated ? (
                 <div className="flex flex-col items-center justify-center py-20 text-[#b0a69b]">
                   <svg className="w-16 h-16 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h10v2H7zm0 4h6v2H7zm0-8h10v2H7z" /></svg>
@@ -474,16 +474,16 @@ function App() {
                   <p className="text-sm">Fill in the form and click "Generate Template"</p>
                 </div>
               ) : (
-                <div ref={templateRef} id="template-content" className="w-full bg-white rounded-xl p-8 max-w-[800px] mx-auto" style={{ padding: '40px' }}>
-                  <div className="w-full flex flex-col bg-white relative">
+                <div ref={templateRef} id="template-content" className="w-full bg-white rounded-xl p-8 md:max-w-[800px] mx-auto" >
+                  <div className="w-full flex flex-col bg-white ">
 
                     {/* Template Header */}
                     <div className="flex items-center justify-between pb-3 border-b-2 border-[#f0ebe5]">
                       <div className="flex items-center gap-3">
                         <img src="/flynas-circle.png" alt="logo" className="w-12 h-12 rounded-full" />
                         <div>
-                          <div className="text-[#1a0a2e] font-bold text-2xl tracking-tight">
-                            Flynas <span className="text-[#01b1ae]">·</span> Booking Confirmation
+                          <div className="text-[#1a0a2e] font-bold md:text-2xl tracking-tight">
+                            Flynas <span className="text-[#01b1ae]">·</span> Booking {formData.pnr ? 'Confirmed' : 'Confirmation' }
                           </div>
                         </div>
                       </div>
@@ -501,12 +501,12 @@ function App() {
                       <div className="text-[14px] text-[#4a3d5a] text-justify font-medium mt-1 mb-4">
                         {formData.pnr ? (
                           <>
-                            Your booking has been confirmed and payment has been received.
+                            Your booking has been confirmed.
                             Please find your <strong>PNR</strong> and flight details below.
                           </>
                         ) : (
                           <>
-                            Greetings from Flynas! We are pleased to confirm your group 
+                            Greetings from Flynas! We are pleased to confirm your group
                             with the following details. Please proceed with the payment as per the
                             installment plan outlined below.
                           </>
@@ -517,7 +517,7 @@ function App() {
                       {/* ── PNR DISPLAY (if provided) ── */}
                       {formData.pnr && (
                         <div className="mb-1">
-                          <div className="inline-block  border border-[#01b1ae]/30 rounded-lg px-8 ">
+                          <div className=" ">
                             <span className="text-xs font-medium text-[#6b5f7a]">PNR:</span>
                             <span className="ml-2 font-bold text-[#1a0a2e]">{formData.pnr}</span>
                           </div>
@@ -528,7 +528,7 @@ function App() {
                       <div className=" mb-2">
                         <div className="bg-slate-50 rounded-xl p-4 border-l-4 border-[#01b1ae] border-y border-r ">
                           <div className="text-xs font-bold uppercase text-[#01b1ae] tracking-wider mb-2 flex justify-between">
-                            <span>🛫 Flight Itinerary</span>
+                            <span>Flight Itinerary</span>
                             {/* Seats Allocation Footer */}
 
                             <span className="text-xs text-slate-800">
@@ -539,7 +539,7 @@ function App() {
                           </div>
 
                           {/* ── TABLE ── */}
-                          <table className="w-full text-sm border-collapse">
+                          <table className="w-full table-auto text-center">
                             <thead>
                               <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20">
                                 <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
@@ -622,7 +622,7 @@ function App() {
                       {
                         !formData.pnr && (
                           <div className="bg-teal-50 border border-teal-200 rounded-xl p-3.5 mb-4">
-                            <div className="font-bold uppercase tracking-wider text-teal-700 mb-1.5">🏦 Bank Transfer Details</div>
+                            <div className="font-bold uppercase tracking-wider text-teal-700 mb-1.5">Bank Transfer Details</div>
                             <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-slate-700">
                               <div><span className="text-slate-700">Bank Name : </span> <span className="font-semibold text-slate-900">HSBC BANGLADESH</span></div>
                               <div><span className="text-slate-700">Account : </span> <span className="font-semibold text-slate-900">Flynas Company</span></div>
@@ -639,7 +639,6 @@ function App() {
                       {/* ── TERMS & CONDITIONS ── */}
                       <div className="bg-amber-50/80 border border-amber-200/60 rounded-xl p-4 mb-4">
                         <div className="flex items-center gap-2 mb-2.5">
-                          <span className="text-amber-600 text-sm font-bold">📋</span>
                           <span className="text-xs font-bold uppercase tracking-wider text-amber-700">Important Terms & Conditions</span>
                           <div className="flex-1 h-px bg-amber-200/60"></div>
                         </div>
@@ -656,6 +655,10 @@ function App() {
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
                             <span><strong className="font-semibold">Fare Availability:</strong> Fares are subject to availability at the time of booking and may change without prior notice.</span>
+                          </li>
+                          <li className="flex items-start gap-2.5">
+                            <span className="text-amber-500 text-base leading-5">•</span>
+                            <span><strong className="font-semibold">PNR Policy:</strong> The Passenger Name Record (PNR) is subject to change at any time without prior notice.</span>
                           </li>
                         </ul>
 
