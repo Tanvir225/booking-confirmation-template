@@ -466,7 +466,7 @@ function App() {
             </div>
 
             {/* Template Card Wrapper */}
-            <div className="bg-white rounded-2xl md:p-5 shadow-lg border border-[#c9a84c]/12 ">
+            <div className="bg-white rounded-2xl shadow-lg border border-[#c9a84c]/12 ">
               {!isGenerated ? (
                 <div className="flex flex-col items-center justify-center py-20 text-[#b0a69b]">
                   <svg className="w-16 h-16 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h10v2H7zm0 4h6v2H7zm0-8h10v2H7z" /></svg>
@@ -474,7 +474,7 @@ function App() {
                   <p className="text-sm">Fill in the form and click "Generate Template"</p>
                 </div>
               ) : (
-                <div ref={templateRef} id="template-content" className="w-full bg-white rounded-xl p-8 md:max-w-[800px] mx-auto" >
+                <div ref={templateRef} id="template-content" className="w-full bg-white rounded-xl p-5 md:max-w-[800px] mx-auto" >
                   <div className="w-full flex flex-col bg-white ">
 
                     {/* Template Header */}
@@ -516,10 +516,10 @@ function App() {
 
                       {/* ── PNR DISPLAY (if provided) ── */}
                       {formData.pnr && (
-                        <div className="mb-1">
+                        <div className="mb-2">
                           <div className=" ">
                             <span className="text-xs font-medium text-[#6b5f7a]">PNR:</span>
-                            <span className="ml-2 font-bold text-[#1a0a2e]">{formData.pnr}</span>
+                            <span className="ml-2 font-bold text-[#01b1ae]">{formData.pnr}</span>
                           </div>
                         </div>
                       )}
@@ -541,13 +541,13 @@ function App() {
                           {/* ── TABLE ── */}
                           <table className="w-full table-auto text-center">
                             <thead>
-                              <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20">
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT No</th>
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Route</th>
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Dep Time</th>
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Arv Time</th>
-                                <th className="text-left py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Remarks</th>
+                              <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20 ">
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT No</th>
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Route</th>
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">ETD</th>
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">ETA</th>
+                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Remarks</th>
                               </tr>
                             </thead>
                             <tbody>
