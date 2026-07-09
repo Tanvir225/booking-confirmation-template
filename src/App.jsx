@@ -175,7 +175,7 @@ function App() {
         {/* Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-[450px,1fr] gap-8">
           {/* ─── FORM ─── */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 md:sticky md:top-4 h-fit max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 xl:sticky lg:top-4 h-fit max-h-[90vh] overflow-y-auto">
             <h2 className="text-lg font-semibold text-[#1a0a2e]">Booking Details</h2>
             <p className="text-sm text-[#6b5f7a] mb-5 pb-4 border-b border-[#eeeae5]">
               Fill in the fields to generate your confirmation template.
@@ -197,11 +197,11 @@ function App() {
               </div>
 
               {/* Reference & Journey Type */}
-              <div className="">
+              <div className="flex w-full gap-5">
 
                 {/* PNR Input */}
-                <div>
-                  <label className="block text-xs font-semibold text-[#2d1b4e] mb-1">PNR</label>
+                <div className="w-full">
+                  <label className="text-xs font-semibold text-[#2d1b4e] mb-1">PNR</label>
                   <input
                     type="text"
                     name="pnr"
@@ -212,18 +212,20 @@ function App() {
                   />
                 </div>
 
-                <label className="block text-xs font-semibold text-[#2d1b4e] mb-1 w-full">
-                  Journey Type
-                </label>
-                <select
-                  name="tripType"
-                  value={formData.tripType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] focus:border-[#c9a84c] focus:ring-4 focus:ring-[#c9a84c]/15 outline-none transition"
-                >
-                  <option value="oneWay">One Way</option>
-                  <option value="roundTrip">Round Trip (Umrah)</option>
-                </select>
+                <section className=" w-full">
+                  <label className=" text-xs font-semibold text-[#2d1b4e] mb-1 w-full">
+                    Journey Type
+                  </label>
+                  <select
+                    name="tripType"
+                    value={formData.tripType}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] focus:border-[#c9a84c] focus:ring-4 focus:ring-[#c9a84c]/15 outline-none transition"
+                  >
+                    <option value="oneWay">One Way</option>
+                    <option value="roundTrip">Round Trip (Umrah)</option>
+                  </select>
+                </section>
               </div>
 
               {/* ── OUTBOUND FLIGHT SECTOR ── */}
@@ -483,7 +485,7 @@ function App() {
                         <img src="/flynas-circle.png" alt="logo" className="w-12 h-12 rounded-full" />
                         <div>
                           <div className="text-[#1a0a2e] font-bold md:text-2xl tracking-tight">
-                            Flynas <span className="text-[#01b1ae]">·</span> Booking {formData.pnr ? 'Confirmed' : 'Confirmation' }
+                            Flynas <span className="text-[#01b1ae]">·</span> Booking {formData.pnr ? 'Confirmed' : 'Confirmation'}
                           </div>
                         </div>
                       </div>
@@ -539,26 +541,26 @@ function App() {
                           </div>
 
                           {/* ── TABLE ── */}
-                          <table className="w-full table-auto text-center">
-                            <thead>
-                              <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20 ">
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">FLT No</th>
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Route</th>
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">ETD</th>
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">ETA</th>
-                                <th className=" py-2 px-2 text-[11px] font-bold uppercase tracking-wider text-[#2d1b4e]">Remarks</th>
+                          <table className="w-full text-center text-xs">
+                            <thead className=''>
+                              <tr className="bg-[#01b1ae]/10 border-b border-[#01b1ae]/20">
+                                <th className="p-1 font-bold uppercase tracking-wider text-[#2d1b4e]">FLT Date</th>
+                                <th className="font-bold uppercase tracking-wider text-[#2d1b4e]">FLT No</th>
+                                <th className="font-bold uppercase tracking-wider text-[#2d1b4e]">Route</th>
+                                <th className="font-bold uppercase tracking-wider text-[#2d1b4e]">ETD</th>
+                                <th className="font-bold uppercase tracking-wider text-[#2d1b4e]">ETA</th>
+                                <th className="font-bold uppercase tracking-wider text-[#2d1b4e]">Remarks</th>
                               </tr>
                             </thead>
                             <tbody>
                               {/* Outbound Row */}
                               <tr className="border-b border-slate-200/60 hover:bg-white/50 transition">
-                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formatDate(formData.travelDate)}</td>
-                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">XY-{formData.flightNumber || '—'}</td>
-                                <td className="py-2 px-2 font-semibold text-[#1a0a2e]">{formData.routeFrom} → {formData.routeTo}</td>
-                                <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.departureTime)}</td>
-                                <td className="py-2 px-2 text-[#1a0a2e]">{formatTime(formData.arrivalTime)}</td>
-                                <td className="py-2 px-2">
+                                <td className="p-1 font-semibold text-[#1a0a2e]">{formatDate(formData.travelDate)}</td>
+                                <td className="p-1 font-semibold text-[#1a0a2e]">XY-{formData.flightNumber || '—'}</td>
+                                <td className="p-1 font-semibold text-[#1a0a2e]">{formData.routeFrom} → {formData.routeTo}</td>
+                                <td className="p-1 text-[#1a0a2e]">{formatTime(formData.departureTime)}</td>
+                                <td className="p-1 text-[#1a0a2e]">{formatTime(formData.arrivalTime)}</td>
+                                <td className="p-1">
                                   <span className="inline-block px-2  text-green-700 text-[10px] font-semibold rounded-full">Outbound</span>
                                 </td>
                               </tr>
@@ -646,11 +648,11 @@ function App() {
                         <ul className="space-y-1.5 text-sm text-[#2d1b4e]">
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
-                            <span><strong className="font-semibold">Non-Refundable & Non-Changeable:</strong> Flynas tickets are non-refundable and non-changeable once issued.</span>
+                            <span><strong className="font-semibold">Non-Refundable & Non-Changeable:</strong> Flynas tickets are non-refundable and non-changeable.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
-                            <span><strong className="font-semibold">Child Fare Policy:</strong> We do not offer separate child fares. All passengers are charged at the applicable adult fare.</span>
+                            <span><strong className="font-semibold">Child Fare Policy:</strong> We do not offer separate child fares. All passengers(without INF) are charged adult fare.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
