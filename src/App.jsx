@@ -34,8 +34,8 @@ function App() {
     dueDate1: '',
     dueDate2: '',
     dueDate3: '',
-    signatoryName: '',
-    signatoryTitle: '',
+    // signatoryName: '',
+    // signatoryTitle: '',
     signatureDate: '',
   });
 
@@ -154,8 +154,8 @@ function App() {
       dueDate1: '',
       dueDate2: '',
       dueDate3: '',
-      signatoryName: '',
-      signatoryTitle: '',
+      // signatoryName: '',
+      // signatoryTitle: '',
       signatureDate: '',
     });
     setIsGenerated(false);
@@ -427,11 +427,11 @@ function App() {
 
               {/* Signature Info */}
               <div className="border-t border-[#eeeae5] pt-4 mt-2">
-                <label className="block text-xs font-semibold text-[#2d1b4e] mb-2">Signature Details</label>
+                <label className="block text-sm font-semibold text-[#2d1b4e] mb-2">Issue Date</label>
                 <div className="space-y-2">
-                  <input type="text" name="signatoryName" value={formData.signatoryName} onChange={handleChange} placeholder="Full Name" className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] outline-none" />
-                  <div className="grid grid-cols-2 gap-2">
-                    <input type="text" name="signatoryTitle" value={formData.signatoryTitle} onChange={handleChange} placeholder="Title" className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] outline-none" />
+                  {/* <input type="text" name="signatoryName" value={formData.signatoryName} onChange={handleChange} placeholder="Full Name" className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] outline-none" /> */}
+                  <div className="grid grid-cols-1 gap-2">
+                    {/* <input type="text" name="signatoryTitle" value={formData.signatoryTitle} onChange={handleChange} placeholder="Title" className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] outline-none" /> */}
                     <input type="date" name="signatureDate" value={formData.signatureDate} onChange={handleChange} className="w-full px-4 py-2.5 border border-[#e2dad2] rounded-xl bg-[#faf8f6] outline-none" />
                   </div>
                 </div>
@@ -650,18 +650,21 @@ function App() {
                             <span className="text-amber-500 text-base leading-5">•</span>
                             <span><strong className="font-semibold">Non-Refundable & Non-Changeable:</strong> Flynas tickets are non-refundable and non-changeable.</span>
                           </li>
-                          <li className="flex items-start gap-2.5">
-                            <span className="text-amber-500 text-base leading-5">•</span>
-                            <span><strong className="font-semibold">Child Fare Policy:</strong> We do not offer separate child fares. All passengers(without INF) are charged adult fare.</span>
-                          </li>
+
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
                             <span><strong className="font-semibold">Fare Availability:</strong> Fares are subject to availability at the time of booking and may change without prior notice.</span>
                           </li>
+
                           <li className="flex items-start gap-2.5">
                             <span className="text-amber-500 text-base leading-5">•</span>
-                            <span><strong className="font-semibold">PNR Policy:</strong> The Passenger Name Record (PNR) is subject to change at any time without prior notice.</span>
+                            <span><strong className="font-semibold">Child Fare Policy:</strong> We do not offer separate child fares. All passengers(without INF) are charged adult fare.</span>
                           </li>
+
+                          {/* <li className="flex items-start gap-2.5">
+                            <span className="text-amber-500 text-base leading-5">•</span>
+                            <span><strong className="font-semibold">PNR Policy:</strong> The Passenger Name Record (PNR) is subject to change at any time without prior notice.</span>
+                          </li> */}
                         </ul>
 
                         {/* Small footer note */}
@@ -674,9 +677,9 @@ function App() {
 
                       {/* Sign-off Segment */}
                       <div className="border-2 border-dashed border-[#d5cdc4] rounded-xl p-3">
-                        <div className="text-xs font-bold  tracking-wider text-[#6b5f7a] mb-1">Best Regards</div>
+                        {/* <div className="text-xs font-bold  tracking-wider text-[#6b5f7a] mb-1">Best Regards</div>
                         <div className="text-base font-bold text-[#01b1ae]">{formData.signatoryName}</div>
-                        <div className="text-xs font-medium text-slate-700">{formData.signatoryTitle}</div>
+                        <div className="text-xs font-medium text-slate-700">{formData.signatoryTitle}</div> */}
                         <div className="my-1.5"><img src="/signaturepng.png" alt="signature" className="h-12" /></div>
                         <div className='text-sm space-y-2'>
                           <p className='font-bold'>FLYNAS GSA BANGLADESH</p>
