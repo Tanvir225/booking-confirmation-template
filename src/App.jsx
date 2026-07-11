@@ -631,7 +631,7 @@ function App() {
                               <div><span className="text-slate-700">A/C No  : </span> <span className="font-semibold text-slate-900">007-046931-011</span></div>
                               <div><span className="text-slate-700">Swift : </span> <span className="font-semibold text-slate-900">HSBCBDDH</span></div>
                               <div><span className="text-slate-700">Routing : </span> <span className="font-semibold text-slate-900">115264636</span></div>
-                              <div><span className="text-slate-700">Method : </span> <span className="font-semibold text-slate-900">RTGS</span></div>
+                              <div><span className="text-slate-700">Method : </span> <span className="font-semibold text-red-900">Pay Order</span></div>
                               <div className="col-span-2 mt-0.5"><span className="text-slate-700">Branch  : </span> <span className="text-slate-900">Uttara Branch, Giant Business Tower, Dhaka, Bangladesh</span></div>
                             </div>
                           </div>
