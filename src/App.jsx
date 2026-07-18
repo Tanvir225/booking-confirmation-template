@@ -11,18 +11,18 @@ function App() {
     tripType: 'roundTrip', // default to roundTrip for Umrah/Return scenarios
     // Outbound Segment
     travelDate: '',
-    flightNumber: '',
-    routeFrom: '',
-    routeTo: '',
-    departureTime: '',
-    arrivalTime: '',
+    flightNumber: '674',
+    routeFrom: 'DAC',
+    routeTo: 'JED',
+    departureTime: '17:30',
+    arrivalTime: '21:15',
     // Return Segment
     returnTravelDate: '',
-    returnFlightNumber: '',
-    returnRouteFrom: '',
-    returnRouteTo: '',
-    returnDepartureTime: '',
-    returnArrivalTime: '',
+    returnFlightNumber: '673',
+    returnRouteFrom: 'JED',
+    returnRouteTo: 'DAC',
+    returnDepartureTime: '06:15',
+    returnArrivalTime: '16:00',
 
     seats: '',
     farePerPax: '',
@@ -175,7 +175,7 @@ function App() {
         {/* Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-[450px,1fr] gap-8">
           {/* ─── FORM ─── */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 xl:sticky lg:top-4 h-fit max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl p-6 shadow-lg border border-[#c9a84c]/15 xl:sticky lg:top-4 h-[99vh] overflow-y-auto">
             <h2 className="text-lg font-semibold text-[#1a0a2e]">Booking Details</h2>
             <p className="text-sm text-[#6b5f7a] mb-5 pb-4 border-b border-[#eeeae5]">
               Fill in the fields to generate your confirmation template.
